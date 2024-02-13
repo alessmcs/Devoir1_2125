@@ -33,6 +33,12 @@ def read_problems(input_file):
         graphes.append(unGraphe) #rajouter a la liste de tous les graphes des problemes
         index += nbSommets
     file.close()
+    return graphes
+
+# Faire une fonction pour calculer la distance euclidienne entre les sommets 
+def distance(sommet1, sommet2):
+    # Les sommets sont un tableau de taille 2 tq le sommet x aie les composantes [x1, x2]
+    return math.sqrt((float(sommet2[0]) - float(sommet1[0]))**2 + (float(sommet2[1]) - float(sommet1[1]))**2)
 
 
 def write(fileName, content):
@@ -41,12 +47,36 @@ def write(fileName, content):
     file.write(content)
     file.close()
 
+def traiterGraphe(sommets):
+    listeAretes = [] # une arête sera de la forme [s1, s2, long]
+    # calculer la longueur de chaque arête dans le graphe
+    for i in range(sommets.len()-1):
+        for j in range(sommets.len() - 1):
+            if i!=j:
+                arete = [sommets[i], sommets[j], distance(sommets[i], sommets[j])]
+                if arete not in listeAretes: # évite la duplication
+                    listeAretes.append(arete)
+                    listeAretes.sort() # trier à chaque fois qu'on ajoute 
+    return 
+
+def kruskal(listeAretes, listeSommets):
+    arbre = []
+    while arbre.len() < (listeSommets.len() - 1):
+        areteMin = listeAretes.pop()
+    return 
 
 #Fonction main/Main function
 def main(args):
     input_file = args[0]
     output_file = args[1]
     
+    #tableau des différents problèmes 
+    problemes = read_problems(input_file)
+
+    for p in problemes:
+        graphe = p # un graphe
+        traiterGraphe(graphe)
+        # calculer la longueur de chaque arête dans le graphe
 
 
 
