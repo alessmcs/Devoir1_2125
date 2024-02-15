@@ -19,19 +19,19 @@ INFINITY = math.inf
 def read_problems(input_file):
     # lecture du fichier/file reading
     file = open(input_file,"r")
-    lines = file.readlines() #lines est un tableau avec chaque ligne du fichier texte
+    lines = [line.strip() for line in file.readlines()]
     graphes = []
-    nbProblemes = lines[0]
+    nbProblemes = int(lines[0])
     index = 1
-    while index <= (lines.len() + 1):
-        nbSommets = lines[index]
+    while index < (len(lines)):
+        nbSommets = int(lines[index])
         unGraphe = [] #le graphe est un tableau de sommets
         # Lire les coordonnées pour chaque sommet
-        for ligne in range(1, nbSommets):
+        for ligne in range(1, nbSommets + 1):
             coordonnees = lines[index + ligne].split(" ")
             unGraphe.append(coordonnees)
         graphes.append(unGraphe) #rajouter a la liste de tous les graphes des problemes
-        index += nbSommets
+        index += nbSommets + 1
     file.close()
     return graphes
 
@@ -48,42 +48,65 @@ def write(fileName, content):
     file.close()
 
 def traiterGraphe(sommets):
-    listeAretes = [] # une arête sera de la forme [s1, s2, long]
+    nbSommets = len(sommets);
+    matAdj = []
     # calculer la longueur de chaque arête dans le graphe
-    for i in range(sommets.len()-1):
-        for j in range(sommets.len() - 1):
-            if i!=j:
-                arete = [sommets[i], sommets[j], distance(sommets[i], sommets[j])]
-                if arete not in listeAretes: # évite la duplication
-                    listeAretes.append(arete)
-                    listeAretes.sort() # trier à chaque fois qu'on ajoute 
-    return 
+    for i in range(nbSommets):
+        unSommet = []
+        for j in range(nbSommets):
+            if i == j:
+                unSommet.append(0)
+            else:
+                dist = distance(sommets[i], sommets[j])
+                unSommet.append(dist) # ajouter a la matrice d'adjacence 
+        matAdj.append(unSommet)
+    for ligne in matAdj:
+        print(ligne)
+    return matAdj
 
-def kruskal(listeAretes, listeSommets):
+# algo de prim adapté pour retourner le poids des arêtes seulement 
+# source: https://www.programiz.com/dsa/prim-algorithm#:~:text=Prim's%20Algorithm%20pseudocode,connecting%20the%20least%20weight%20edge
+def prim(matAdj):
     arbre = []
-    while arbre.len() < (listeSommets.len() - 1):
-        areteMin = listeAretes.pop()
-    return 
+    selectionnee = []
+    numSommets = len(matAdj) 
+    for i in range(numSommets):
+        selectionnee.append(0)
+    num_arete = 0
+    selectionnee[0] = True #on commence par sélectionner la 1ere arête
+    while num_arete < (numSommets - 1):
+        min = INFINITY
+        u_p = 0
+        u = 0
+        for i in range(numSommets):
+            if selectionnee[i]: #si le sommet est sélectionné en ce moment
+                for j in range(numSommets):
+                    if( (not selectionnee[j]) and matAdj[i][j]):
+                        if min > matAdj[i][j]:
+                            min = matAdj[i][j]
+                            u_p = i
+                            u = j
+        arbre.append(matAdj[u][u_p])
+        selectionnee[u] = True
+        num_arete += 1
+    poidsTotal = 0
+    for i in arbre: 
+        poidsTotal += i
+    return poidsTotal
 
 #Fonction main/Main function
 def main(args):
-    input_file = args[0]
-    output_file = args[1]
+    input_file = "/Users/alessandramancas/Desktop/Devoir1_2125/input0.txt"
+    #input_file = args[0]
+    #output_file = args[1]
     
     #tableau des différents problèmes 
     problemes = read_problems(input_file)
-
     for p in problemes:
         graphe = p # un graphe
-        traiterGraphe(graphe)
+        matAdj = traiterGraphe(graphe) # retourne une matrice d'adjacence contenant les poids des arêtes
+        poidsTotal = prim(matAdj) # prim retourne le poids total 
         # calculer la longueur de chaque arête dans le graphe
-
-
-
-    #Toutes les arêtes entre chaque paire de sommets sont possibles 
-    #Le poids d'une arête est la distance euclidienne entre les 2 coordonnées 
-    #On pourrait copier le pseudocode vu en classe & implementer l'algo 
-    #Réponse retournée doit être le poids de l'ACM
 
     #TODO : Continuer ici/Complete here...
     #Vous pouvez découper votre code en d'autres fonctions...
