@@ -5,12 +5,6 @@ import math
 import sys
 INFINITY = math.inf
 
-#TODO: interpréter les fichiers input 
-    # PARSER CHQ PROBLÈME 
-    # coordonnées sont en x & y (par convention)
-    # chq ligne est un sommet avec ses coordonnées respectives
-
-
 #TODO: Kruskal en python a partir du pseudocode 
 
 #Fonctions pour lire/écrire dans les fichier. Vous pouvez les modifier, 
@@ -97,8 +91,8 @@ def prim(matAdj):
 #Fonction main/Main function
 def main(args):
     input_file = "/Users/alessandramancas/Desktop/Devoir1_2125/input0.txt"
-    #input_file = args[0]
-    #output_file = args[1]
+    input_file = args[0]
+    output_file = args[1]
     
     #tableau des différents problèmes 
     problemes = read_problems(input_file)
@@ -106,11 +100,7 @@ def main(args):
         graphe = p # un graphe
         matAdj = traiterGraphe(graphe) # retourne une matrice d'adjacence contenant les poids des arêtes
         poidsTotal = prim(matAdj) # prim retourne le poids total 
-        # calculer la longueur de chaque arête dans le graphe
-
-    #TODO : Continuer ici/Complete here...
-    #Vous pouvez découper votre code en d'autres fonctions...
-    #You may split your code in other functions...
+        write(output_file, poidsTotal)
 
 
 #NE PAS TOUCHER
