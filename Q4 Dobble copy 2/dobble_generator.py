@@ -39,37 +39,47 @@ class Generator():
         
         # do the first n symbols 
         for i in range(n):
-            s = symboles.pop() #remove from list
+            s = symboles.pop(0) #remove from list
             for j in tab1[i]: #rangée du tab 1
                 j.append(s)
             tab2[0].append(s)
         
-        # 2n prochains symboles
+        # n prochains symboles
         section = symboles[:n]
         for i in range(n):
             for j in section:
-                tab1[i][(j.index() + i)%n].append(j)
-                tab1[i][(j.index() + i)%n].append(symboles[j.index() + n])
-            tab2[1].append(section[i]) 
-            tab2[2].append(symboles[i+n])
+                tab1[i][(section.index(j) + i)%n].append(j)
+            tab2[1].append(section[i])    
+
+        #pop les n prochains elems 
+        for i in range(n):
+            symboles.pop(0)
+
+        # n prochains symboles
+        section2 = symboles[:n]
+        index = 0
+        for i in range(n):
+            for j in section2:
+                tab1[i][(section2.index(j) + index)%n].append(j)
+            tab2[2].append(section2[i]) 
+            index += 2
         
-        #pop les 2n prochains elems 
-        for i in range(2*n):
-            symboles.pop()
+        for i in range(n):
+            symboles.pop(0)
 
         index = 3
         while(len(symboles)>1):
             # remplir les colonnes du tab1 en bonds de n
             # & ajouter au tab2
             for i in range(n):
-                s = symboles.pop()
+                s = symboles.pop(0)
                 for j in range(n):
                     tab1[j][i].append(s)
                 tab2[index].append(s)
             index += 1
 
         # dernier elem de symboles -> remplir l'horizon
-        dernierSymbole = symboles.pop()
+        dernierSymbole = symboles.pop(0)
         for i in tab2:
             i.append(dernierSymbole)
             
