@@ -2,10 +2,8 @@
 #Nom, Matricule
 
 # cette classe sert a verifier la validite de l'ensemble des cartes du jeu dans le fichier cartes.txt
-# this class is used to check the validity  of the game cards set in the cartes.txt file
 
 # doit retourner 0 si tout est correct, 1 si le jeu n'est pas optimal selon l'ordre et 2 si le jeu n'est pas valide
-# should return 0 if everything is correct, 1 if the game set is not optimal according to the order and 2 if the game set is invalid
 
 #import os.path
 
@@ -19,7 +17,8 @@ class Verificator():
         # TODO
         # a completer
 
-        # test : le nombre de carte devrait être optimal
+        # test : le nombre de carte devrait être optimal 
+            # càd n^2 + n + 1
         # test : le nombre de symboles par carte est le même pour chaque carte
         # test : chaque paire de cartes partagent toujours un et un seul symbole en commun
         # test : le nombre de symbole total devrait être optimal

@@ -39,13 +39,14 @@ if __name__ == '__main__':
                 [129783.214]]
     for i in range(len(expected)):
         try:
-            acm.main(["input" + str(i) + ".txt", "output" + str(i) + ".txt"])
+            acm.main(["/Users/alessandramancas/Desktop/Devoir1_2125/Q3_ACM/input" + str(i) + ".txt", "output" + str(i) + ".txt"])
             verifyAns("output" +str(i) + ".txt", expected[i])
             print("Test " + str(i) + " OK\n")
         except Exception as e: 
             print("Test " + str(i) + " Fail")
             print(e)
             print()
+    
     
 
     

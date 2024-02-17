@@ -54,8 +54,6 @@ def traiterGraphe(sommets):
                 dist = distance(sommets[i], sommets[j])
                 unSommet.append(dist) # ajouter a la matrice d'adjacence 
         matAdj.append(unSommet)
-    for ligne in matAdj:
-        print(ligne)
     return matAdj
 
 # algo de prim adapté pour retourner le poids des arêtes seulement 
@@ -94,13 +92,15 @@ def main(args):
     input_file = args[0]
     output_file = args[1]
     
+    solString = ""
     #tableau des différents problèmes 
     problemes = read_problems(input_file)
     for p in problemes:
         graphe = p # un graphe
         matAdj = traiterGraphe(graphe) # retourne une matrice d'adjacence contenant les poids des arêtes
         poidsTotal = prim(matAdj) # prim retourne le poids total 
-        write(output_file, poidsTotal)
+        solString += str(round(poidsTotal, 3)) + "\n"
+    write(output_file,solString)
 
 
 #NE PAS TOUCHER

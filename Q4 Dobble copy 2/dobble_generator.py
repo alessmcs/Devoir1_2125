@@ -8,7 +8,6 @@ import random # pour le melange des symboles sur chaque carte # for mixing symbo
 from random import shuffle
 
 class Generator():
-    # QUESTION: pk init a 7?
     def __init__(self, order = 7): # donc il y aura 13 cartes et 13 symboles 
         self.order = order
 
@@ -82,11 +81,25 @@ class Generator():
     
         for c in tab2:
             random.shuffle(c)
-
-        # TODO
+    
         # ecriture des cartes dans le fichier cards_file
-       
+        solString = ""
+        file = open(cards_file, "w")
+        for c in tab1:
+            for i in c: 
+                ligne = ""
+                for j in i: 
+                    ligne += j + " "
+                solString += ligne + "\n"
+
+        for c in tab2: 
+            ligne = ""
+            for i in c: 
+                ligne += i + " "
+            solString += ligne + "\n"
+
+        file = open(cards_file, "w")
+        file.write(solString)
+        file.close()
         
-            
-        # TODO
-        # a completer
+    
