@@ -1,5 +1,5 @@
 #Nom, Matricule
-#Nom, Matricule
+#MANCAS Alessandra, 20249098
 
 # cette classe sert a créer les cartes visuelles du jeu dans le dossier "results"
 # this class is used to create the game visual cards in the "results" folder
@@ -22,70 +22,47 @@ class Creator():
         if verbose :
             print("***Creation des cartes visuelles***")
 
-        ordre = 0
+        table = []
         lignes = 0
         if os.path.isfile(cards_file):
             with open(cards_file, 'r') as file:
-                lignes = file.readlines()
-                print(lignes)
-                #ordre = len(ligne) #une ligne de cards file aura le nombre d'images demandé 
+               lignes = file.readlines()
+            for ligne in lignes:
+                uneCarte = ligne.strip().split(" ")
+                table.append(uneCarte)
 
-        for l in lignes:
-            uneCarte = l.split(" ")
-            index = 0
-            for i in range(3):
-                for j in range(3):
-                    paste_region = (15 + j*315, 15 + i*315, 15 + 300+j*315, 15 + 300 + i*315)  # Adjust these  values as needed (left, upper, right, lower) 
-                    img.paste(Image.open(images[i]).resize((300, 300)), paste_region)
-                    index += 1
-            img.show()
-            print(uneCarte)
-
-        # Lecture des images à partir du dossier "images" : "1.png2, "2.png", "3.png", ... "<N>.png"
+        # lecture des images à partir du dossier "images" : "1.png2, "2.png", "3.png", ... "<N>.png"
         dossier_images = "Q4 Dobble copy 2/images"
         images = []
         for filename in os.listdir(dossier_images):
             if filename.endswith(".png"): 
                 images.append(os.path.join(dossier_images, filename))
 
-        # essayer de faire une carte avec une image 
         img = Image.new("RGB", (960, 960), (255, 255, 255))
 
-        index = 0
-        for i in range(3):
-            for j in range(3):
-                paste_region = (15 + j*315, 15 + i*315, 15 + 300+j*315, 15 + 300 + i*315)  # Adjust these  values as needed (left, upper, right, lower) 
-                img.paste(Image.open(images[index]).resize((300, 300)), paste_region)
-                index += 1
-
-
-        img.show()
-
-
-        #sectionner la carte selon l'ordre 
-
-
-
-        #for carte in range(len(ligne)) :
-        #une_carte = Image.new("RBG", (500,500),(255, 255, 255))
-            # placement des images sur les cartes visuelles, rotations appréciées
-             #for image in images:
-        #image = Image.open(dossier_images)
-        #image.resize(self.pic_size)
-        #une_carte.paste(image, (0,0))
-        #image.show()
-
-        # Ajout de la bordure sur les cartes visuelles
-        # sauvegarde des cartes dans le dossier "results" : "card1.jpg", "card2.jpg", "card3.jpg", ... "card<N>.jpg"
+        # nous avons implémenté la création de cartes pour l'ordre 7 seulement (8 images par carte)
+        imageCounter = 0
+        for carte in table:
+            index = 1
+            nbImages = len(carte)
+            for i in range(3):
+                for j in range(3):
+                    if index < nbImages: 
+                        paste_region = (15 + j * 315, 15 + i * 315, 15 + 300 + j * 315, 15 + 300 + i * 315)
+                        ind = int(carte[index])
+                        img.paste(Image.open(images[ind -1]).resize((300, 300)), paste_region)
+                        index += 1
             
-        # reading images from the "images" folder: "1.png2, "2.png", "3.png", ..., "<N>.png"
-        # placement of images on visual cards, rotations appreciated
-        # added border on visual cards
-        # save cards in the “results” folder : "card1.jpg", "card2.jpg", "card3.jpg", ... "card<N>.jpg"
+            img2 = Image.new("RGB", (990, 990), (128, 128, 128)) # ajouter une bordure 
+            paste_region2 = (15, 15, 15 + 960, 15 + 960)
+            img2.paste(img, paste_region2)
+            # enregistrer cartes dans le dossier "results"
+            img2.save("Q4 Dobble copy 2/results/card" + str(imageCounter) +".png")
+            imageCounter +=1
 
 
 # Create an instance of the Creator class
 card_creator = Creator(pic_size=300, border_size=10, padding=10)
 
 # Call the make_cards method
-card_creator.make_cards(cards_file="/Users/alessandramancas/Desktop/Devoir1_2125/Q4 Dobble copy 2/cartes_test1.txt", verbose=True)
+card_creator.make_cards(cards_file="/Users/alessandramancas/Desktop/Devoir1_2125/Q4 Dobble copy 2/cartes_test6.txt", verbose=True)
