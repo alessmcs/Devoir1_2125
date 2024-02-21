@@ -61,9 +61,13 @@ class Verificator:
             nombre_tot_symbole = len(liste_symbole)
 
 
-            if carte_optimal == nombre_carte and symbole_par_carte_optimal == symbole_par_carte and nombre_total_symbole_optimale == nombre_tot_symbole:
+            if carte_optimal == nombre_carte and \
+                    symbole_par_carte_optimal == symbole_par_carte \
+                    and nombre_total_symbole_optimale == nombre_tot_symbole:
                 resultat = True
-            elif carte_optimal > nombre_carte or symbole_par_carte_optimal == symbole_par_carte or nombre_total_symbole_optimale == nombre_tot_symbole:
+            elif carte_optimal > nombre_carte or \
+                    symbole_par_carte_optimal == symbole_par_carte \
+                    or nombre_total_symbole_optimale == nombre_tot_symbole:
                 return pas_optimal
             else:
                 resultat = False
