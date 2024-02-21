@@ -1,5 +1,5 @@
-//Nom, Matricule
-//Nom, Matricule
+// Alessandra MANCAS 20249098
+// Océane HAYS 20240742
 
 #include "PrimeCalculator.h"
 // #include <vector>

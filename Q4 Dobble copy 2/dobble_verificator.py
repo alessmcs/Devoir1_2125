@@ -1,5 +1,5 @@
-# Nom, Matricule
-# Nom, Matricule
+#Océane HAYS, 20240742
+#Alessandra MANCAS, 20249098
 
 # cette classe sert a verifier la validite de l'ensemble des cartes du jeu dans le fichier cartes.txt
 

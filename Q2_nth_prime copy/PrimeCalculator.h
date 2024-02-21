@@ -1,5 +1,5 @@
-//Nom, Matricule
-//Nom, Matricule
+// Alessandra MANCAS 20249098
+// Océane HAYS 20240742
 
 // ce fichier contient les declarations des methodes de la classe PrimeCalculator
 // peut être modifié si vous voulez ajouter d'autres méthodes à la classe
