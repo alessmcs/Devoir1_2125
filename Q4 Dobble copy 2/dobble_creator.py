@@ -4,7 +4,7 @@
 # cette classe sert a créer les cartes visuelles du jeu dans le dossier "results"
 # this class is used to create the game visual cards in the "results" folder
 
-#from PIL import Image
+from PIL import Image
 import os
 import math
 import random
@@ -22,20 +22,33 @@ class Creator():
         if verbose :
             print("***Creation des cartes visuelles***")
 
-
+        ordre = 0
         if os.path.isfile(cards_file):
             with open(cards_file, 'r') as file:
                 ligne = file.readlines()
-
+                ordre = len(ligne)
 
         #img = Image.new("RGB", (, height), background_color)
 
         # Lecture des images à partir du dossier "images" : "1.png2, "2.png", "3.png", ... "<N>.png"
-        dossier_images = "images"
+        dossier_images = "Q4 Dobble copy 2/images"
         images = []
         for filename in os.listdir(dossier_images):
-            if filename.endswith(".png"):  # le fichier se termine par ".png"
+            if filename.endswith(".png"): 
                 images.append(os.path.join(dossier_images, filename))
+
+        # essayer de faire une carte avec une image 
+        img = Image.new("RGB", (500, 500), (255, 255, 255))
+
+        # Specify the region to paste onto
+        paste_region = (10, 10, 10 + 300, 10 + 300)  # Adjust these values as needed (left, upper, right, lower)
+
+        # Paste the first image onto the specified region
+        img.paste(Image.open(images[0]).resize((300, 300)), paste_region)
+
+        # Save or display the resulting image
+        img.show()
+
 
         #for carte in range(len(ligne)) :
         #une_carte = Image.new("RBG", (500,500),(255, 255, 255))
@@ -54,3 +67,8 @@ class Creator():
         # added border on visual cards
         # save cards in the “results” folder : "card1.jpg", "card2.jpg", "card3.jpg", ... "card<N>.jpg"
 
+# Create an instance of the Creator class
+card_creator = Creator(pic_size=300, border_size=10, padding=10)
+
+# Call the make_cards method
+card_creator.make_cards(cards_file="cartes.txt", verbose=True)
