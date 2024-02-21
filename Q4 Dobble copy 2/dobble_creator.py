@@ -4,10 +4,10 @@
 # cette classe sert a créer les cartes visuelles du jeu dans le dossier "results"
 # this class is used to create the game visual cards in the "results" folder
 
-#from PIL import Image
-#import os
-#import math
-#import random
+from PIL import Image
+import os
+import math
+import random
 
 # info :
 # https://pillow.readthedocs.io/en/stable/reference/Image.html
@@ -22,9 +22,11 @@ class Creator():
             print("***Creation des cartes visuelles***")
 
         # TODO
-        # a completer
-
         # lecture des images à partir du dossier "images" : "1.png2, "2.png", "3.png", ... "<N>.png"
+
+        
+
+
         # placement des images sur les cartes visuelles, rotations apreciees
         # ajout de la bordure sur les cartes visuelles
         # sauvegarde des cartes dans le dossier "results" : "card1.jpg", "card2.jpg", "card3.jpg", ... "card<N>.jpg"
