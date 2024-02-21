@@ -9,7 +9,6 @@ from random import shuffle
 
 
 class Generator():
-    # QUESTION: pk init a 7?
     def __init__(self, order=7):  # donc il y aura 13 cartes et 13 symboles
         self.order = order
 
